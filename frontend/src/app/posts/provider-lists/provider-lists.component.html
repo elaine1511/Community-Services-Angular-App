@@ -1,0 +1,16 @@
+<h3>Work Provide Posts</h3>
+     <div *ngFor="let post of postLists">
+        <ol class="list-group list-group-numbered">
+            <li class="list-group-item">Created Date: {{ post.createTime | date: 'medium' }}</li>
+            <li class="list-group-item">Username: {{ post.createrName }}</li>
+            <li class="list-group-item">Content: {{ post.content }}</li>
+            <li class="list-group-item">Location: {{ post.city}}, {{ post.state}</li>
+          </ol>
+          <button>Detail</button>
+        </div>    
+   <div *ngIf="postLists == undefined">
+     There is no post. Please check back later!
+   </div>
+   <div *ngIf="postLists != undefined" style="text-align: center; ">
+     <button (click)="loadmore()">Load More...</button>
+ </div>
