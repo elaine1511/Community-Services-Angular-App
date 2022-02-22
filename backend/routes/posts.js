@@ -3,7 +3,7 @@ var router = express.Router()
 const { isAuth } = require('../controllers/auth')
 const { getAllWorkProviderPosts, getAllWorkRequestPosts, getPostById, addNewPost, editPostById, deletePostById, addNewComment, editcommentById, deletecommentById } = require('../controllers/post')
 
-router.use('/', isAuth);
+router.use(isAuth);
 router.get('/providers/:city/:state/:page', getAllWorkProviderPosts);
 router.get('/requests/:city/:state/:page', getAllWorkRequestPosts);
 router.post('/:id', getPostById);

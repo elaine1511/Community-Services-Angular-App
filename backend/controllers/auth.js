@@ -89,7 +89,6 @@ const login = async (req, res) => {
                 userData.state = foundUser.state;
                 userData.phone = foundUser.phone;
                 const token = jwt.sign(userData, process.env.SECRET);
-                res.cookie('token', token)
                 res.status(200).json({
                     status: 'Success',
                     authtoken: token,

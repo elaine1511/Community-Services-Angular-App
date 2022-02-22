@@ -10,7 +10,7 @@ import { UserService } from '../user.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   subscription!: Subscription;
   constructor(
@@ -34,7 +34,15 @@ export class LoginComponent {
   get password(): FormControl {
     return this.loginForm.get('password') as FormControl
   }
+  ngOnInit() {
+    if (!navigator.geolocation) {
+      console.log('location is not supported');
+    }
+    navigator.geolocation.getCurrentPosition(position => {
+      console.log(`lat: ${position.coords.latitude}, long:${position.coords.longitude}`)
 
+    })
+  }
   onLogin(): void {
     this.subscription = this.userService.logIn(this.loginForm.value).subscribe((result: any) => {
       // console.log(result);

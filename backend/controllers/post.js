@@ -3,6 +3,7 @@ const User = require("../models/users");
 const ObjectId = require('mongodb').ObjectId;
 
 const getAllWorkProviderPosts = async (req, res) => {
+    // https://stackoverflow.com/questions/5539955/how-to-paginate-with-mongoose-in-node-js
     try {
         const limit = 25;
         const page = parseInt(req.params.page);
@@ -31,7 +32,7 @@ const getAllWorkProviderPosts = async (req, res) => {
 
         res.json({ status: 'success', results })
     } catch (error) {
-        res.status(500).json({ message: e.message })
+        res.status(500).json({ message: error.message })
     }
 }
 
@@ -64,7 +65,7 @@ const getAllWorkRequestPosts = async (req, res) => {
 
         res.json({ status: 'success', results })
     } catch (error) {
-        res.status(500).json({ message: e.message })
+        res.status(500).json({ message: error.message })
     }
 }
 
@@ -73,7 +74,7 @@ const getPostById = async (req, res) => {
         const response = await Post.findOne({ _id: ObjectId(req.params.id) })
         res.json({ status: 'success', response })
     } catch (error) {
-        res.status(500).json({ message: e.message })
+        res.status(500).json({ message: error.message })
     }
 }
 
@@ -99,7 +100,7 @@ const addNewPost = async (req, res) => {
         console.log(response)
         res.status(201).json({ status: 'success', response });
     } catch (error) {
-        res.status(500).json({ message: e.message })
+        res.status(500).json({ message: error.message })
     }
 }
 
@@ -117,7 +118,7 @@ const editPostById = async (req, res) => {
         const response = await Post.findOneAndUpdate(filter, update, { new: true });
         res.json({ status: 'success', response })
     } catch (error) {
-        res.status(500).json({ message: e.message })
+        res.status(500).json({ message: error.message })
     }
 }
 const deletePostById = async (req, res) => {
@@ -126,7 +127,7 @@ const deletePostById = async (req, res) => {
         const response = await User.findOneAndDelete(filter);
         res.json({ status: 'success', response })
     } catch (error) {
-        res.status(500).json({ message: e.message })
+        res.status(500).json({ message: error.message })
     }
 }
 const addNewComment = async (req, res) => {
@@ -144,7 +145,7 @@ const addNewComment = async (req, res) => {
         });
         res.status(201).json({ status: 'success', response });
     } catch (error) {
-        res.status(500).json({ message: e.message })
+        res.status(500).json({ message: error.message })
     }
 }
 const editcommentById = async (req, res) => {
@@ -157,7 +158,7 @@ const editcommentById = async (req, res) => {
         const response = await Post.findOneAndUpdate({ filter }, update, { new: true });
         res.json({ status: 'success', response })
     } catch (error) {
-        res.status(500).json({ message: e.message })
+        res.status(500).json({ message: error.message })
     }
 }
 const deletecommentById = async (req, res) => {
@@ -169,7 +170,7 @@ const deletecommentById = async (req, res) => {
         const response = await Post.findOneAndUpdate({ filter }, { $pull: { comments: { _id: ObjectId(req.params.comment_id) } } }, { new: true });
         res.json({ status: 'success', response })
     } catch (error) {
-        res.status(500).json({ message: e.message })
+        res.status(500).json({ message: error.message })
     }
 }
 

@@ -57,6 +57,7 @@ export class RegisterComponent {
   }
   goBack() {
     this.router.navigate(['/', 'users', 'login']);
+    alert("Signed up successfully!")
   }
   ngOnDestroy(): void {
     this.subscription.unsubscribe()
